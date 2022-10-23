@@ -166,9 +166,12 @@ void Monocular_calibration::calibration(std::string path, cv::Size boardsize, cv
         std::cout << "图片未加载成功" << std::endl;
         return;
     }
+    double start = clock();
     Getimagespoints(images, boardsize);
     Getobjectpoints(boardsize, squaresize);
     Calibration();
+    double stop = clock();
+    usingtime=((double)(stop - start)) / CLK_TCK;
 }
 
 //棋盘格

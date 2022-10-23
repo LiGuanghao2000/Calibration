@@ -36,6 +36,8 @@ void Monocular::init_mianwindow()
   ui->spinBox_wid->setValue(11);
   ui->spinBox_hei->setValue(8);
   ui->spinBox_sq->setValue(3);
+
+
 }
 /*!
  * 关闭主窗口
@@ -43,9 +45,9 @@ void Monocular::init_mianwindow()
 void Monocular::on_close_clicked()
 {
   this->close();
-  if(cal!= nullptr)
+  if(th_s!= nullptr)
   {
-      delete cal;
+      delete th_s;
   }
   emit monocular_close();
 }
@@ -82,13 +84,28 @@ void Monocular::on_pushButton_start_clicked()
                 break;
         }
     }
+    th_s = new thread_single(images_path,cv::Size(11, 8), cv::Size(3, 3));
+    connect(th_s,&thread_single::Monocular_over,this,&Monocular::Monocular_Done);
+    th_s->start();
     ui->textEdit->append("Calibration...");
-    cal = new Chessboard();
-    cal->calibration(images_path.toStdString(), cv::Size(11, 8), cv::Size(3, 3));
-
-    ui->textEdit->append("Calibration done");
 }
+/*!
+ * 标定完成
+ */
+void Monocular::Monocular_Done()
+{
+    ui->textEdit->append("Calibration done");
+    double time=th_s->Mo->Get_usingtime();
+    ui->textEdit->append("usingtime: "+QString::number(time));
+    std::vector<double> errors;
+    th_s->Mo->Error_analysis(cv::Size(11, 8));
+    errors=th_s->Mo->Get_errors();
+    for (int i = 0; i < errors.size(); ++i)
+    {
+        ui->textEdit->append("error " +QString::number(i)+" : "+QString::number(errors[i]));
+    }
 
+}
 
 
 

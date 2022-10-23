@@ -13,6 +13,7 @@
 #include "qtextedit.h"
 #include "qmessagebox.h"
 #include "Monocular_calibration.h"
+#include "Calibration_thread.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Monocular; }
@@ -31,13 +32,14 @@ class Monocular : public QWidget {
   void on_close_clicked();
   void on_pushButton_sec_clicked();
   void on_pushButton_start_clicked();
+  void Monocular_Done();
 
  signals:
   void monocular_close();
 
  private:
     Ui::Monocular *ui;
-    Monocular_calibration *cal= nullptr;
+    thread_single *th_s= nullptr;
     QString images_path;
 };
 

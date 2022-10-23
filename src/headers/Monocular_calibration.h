@@ -9,7 +9,7 @@
 #include <opencv2/highgui/highgui_c.h>
 #include <thread>
 #include <future>
-
+#include "ctime"
 
 class Monocular_calibration
 {
@@ -31,6 +31,12 @@ public:
 	cv::Mat Get_matrix()                {		return  matrix;	}
 	cv::Mat Get_dist()	                {		return  dist;	}
 
+    /*!
+     * 获取程序运行时间
+     * @return
+     */
+    double Get_usingtime(){return usingtime;}
+
 private:
 	
 
@@ -43,7 +49,7 @@ private:
 	virtual void Getimagespoints(std::vector<cv::Mat> imgs, cv::Size boardsize) = 0;
 	void Getobjectpoints(cv::Size boardsize,cv::Size squaresize);
 	void Calibration();
-	
+
 
 
 protected:
@@ -65,6 +71,8 @@ private:
 
 	std::vector<double>errors;//每张图片误差
 	double total_error;//平均误差
+
+    double usingtime;
 
 };
 
