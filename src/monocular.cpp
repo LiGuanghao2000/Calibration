@@ -84,7 +84,8 @@ void Monocular::on_pushButton_start_clicked()
                 break;
         }
     }
-    th_s = new thread_single(images_path,cv::Size(11, 8), cv::Size(3, 3));
+    save_path = QFileDialog::getExistingDirectory(this);
+    th_s = new thread_single(images_path,cv::Size(ui->spinBox_wid->text().toInt(), ui->spinBox_hei->text().toInt()), cv::Size(ui->spinBox_sq->text().toInt(), ui->spinBox_sq->text().toInt()));
     connect(th_s,&thread_single::Monocular_over,this,&Monocular::Monocular_Done);
     th_s->start();
     ui->textEdit->append("Calibration...");
@@ -95,8 +96,11 @@ void Monocular::on_pushButton_start_clicked()
 void Monocular::Monocular_Done()
 {
     ui->textEdit->append("Calibration done");
+    th_s->Mo->DateWriteyml(save_path.toStdString()+"/Calibration_Date.yml");
+    ui->textEdit->append(save_path+"/Calibration_Date.yml");
     double time=th_s->Mo->Get_usingtime();
     ui->textEdit->append("usingtime: "+QString::number(time));
+
     std::vector<double> errors;
     th_s->Mo->Error_analysis(cv::Size(11, 8));
     errors=th_s->Mo->Get_errors();
@@ -104,10 +108,46 @@ void Monocular::Monocular_Done()
     {
         ui->textEdit->append("error " +QString::number(i)+" : "+QString::number(errors[i]));
     }
+    ui->textEdit->append("avererror: "+QString::number(th_s->Mo->Get_totalerror()/errors.size()));
 
+    images=th_s->Mo->Get_images_orgin();
+    QTreeWidgetItem* item = new QTreeWidgetItem(QStringList() << "images_Calibration");
+    ui->treeWidget->addTopLevelItem(item);
+    for (int i = 0; i < images.size(); ++i)
+    {
+        QTreeWidgetItem* child = new QTreeWidgetItem(QStringList() << QString::number(i));
+        item->addChild(child);
+    }
+
+//    images_C=th_s->Mo->Get_images_C();
+//    QTreeWidgetItem* item1 = new QTreeWidgetItem(QStringList() << "images_Calibration");
+//    ui->treeWidget->addTopLevelItem(item1);
+//    for (int i = 0; i < images_C.size(); ++i)
+//    {
+//        QTreeWidgetItem* child = new QTreeWidgetItem(QStringList() << QString::number(i));
+//        item1->addChild(child);
+//    }
 }
-
-
+/*!
+ * 查看标定图片
+ * @param item
+ * @param column
+ */
+void Monocular::on_treeWidget_itemClicked(QTreeWidgetItem *item, int column)
+{
+    if (item->parent()->text(column) == "images_Calibration")
+    {
+        int k= item->text(column).toInt();
+        //qDebug() << workthread->imgs_b.size();
+        cv::Mat image = images[k];
+        cv::cvtColor(image, image, cv::COLOR_BGR2RGB);
+        if (image.empty())
+            return;
+        QImage img=QImage((const unsigned char*)(image.data),image.cols, image.rows, QImage::Format_RGB888);
+        ui->label_image_title->setText(QString::number(k));
+        ui->label_images->setPixmap(QPixmap::fromImage(img.scaled(ui->label_images->size(), Qt::KeepAspectRatio)));
+    }
+}
 
 
 

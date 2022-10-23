@@ -177,6 +177,9 @@ void Monocular_calibration::calibration(std::string path, cv::Size boardsize, cv
 //棋盘格
 std::vector<cv::Point2f> Chessboard::Getimagepoints(cv::Mat img, cv::Size boardsize)
 {
+    mymutex.lock();
+    images_draw.push_back(img);
+    mymutex.unlock();
 
     std::vector<cv::Point2f> points;
     cv::Mat im = img;
@@ -184,9 +187,7 @@ std::vector<cv::Point2f> Chessboard::Getimagepoints(cv::Mat img, cv::Size boards
     findChessboardCorners(img, boardsize, points);
     find4QuadCornerSubpix(img, points, cv::Size(3, 3));
     drawChessboardCorners(im, boardsize, points, true);
-    //mymutex.lock();
-    //images_draw.push_back(img);
-    //mymutex.unlock();
+
     std::cout << "角点检测成功" << std::endl;
 
     return points;

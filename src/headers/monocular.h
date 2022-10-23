@@ -6,6 +6,7 @@
 #define CAMERA_DEMO__MONOCULAR_H_
 
 #include <QWidget>
+#include "opencv2/opencv.hpp"
 #include "qfiledialog.h"
 #include "iostream"
 #include "qdebug.h"
@@ -14,6 +15,7 @@
 #include "qmessagebox.h"
 #include "Monocular_calibration.h"
 #include "Calibration_thread.h"
+#include "qtreewidget.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Monocular; }
@@ -32,6 +34,7 @@ class Monocular : public QWidget {
   void on_close_clicked();
   void on_pushButton_sec_clicked();
   void on_pushButton_start_clicked();
+  void on_treeWidget_itemClicked(QTreeWidgetItem* item, int column);
   void Monocular_Done();
 
  signals:
@@ -41,6 +44,10 @@ class Monocular : public QWidget {
     Ui::Monocular *ui;
     thread_single *th_s= nullptr;
     QString images_path;
+    QString save_path;
+    std::vector<cv::Mat> images;
+    std::vector<cv::Mat> images_C;
+
 };
 
 #endif //CAMERA_DEMO__MONOCULAR_H_

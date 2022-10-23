@@ -21,6 +21,8 @@ public:
 	bool DateWriteyml(std::string path);
 	void Error_analysis(cv::Size boardsize);
 	void calibration(std::string path, cv::Size boardsize, cv::Size squaresize);
+    std::vector<cv::Mat> Get_images_orgin(){return images;}
+    virtual std::vector<cv::Mat> Get_images_C() = 0;
 
     /*!
      * 获取每张标定角点误差
@@ -47,6 +49,7 @@ private:
 	bool Get_images(std::string path);
 	virtual std::vector<cv::Point2f> Getimagepoints(cv::Mat img, cv::Size boardsize) = 0;
 	virtual void Getimagespoints(std::vector<cv::Mat> imgs, cv::Size boardsize) = 0;
+
 	void Getobjectpoints(cv::Size boardsize,cv::Size squaresize);
 	void Calibration();
 
@@ -85,6 +88,7 @@ public:
 
 	virtual std::vector<cv::Point2f> Getimagepoints(cv::Mat img, cv::Size boardsize);
 	virtual void Getimagespoints(std::vector<cv::Mat> imgs, cv::Size boardsize);
+    virtual std::vector<cv::Mat> Get_images_C(){return images_draw;}
 	//virtual void Getimagespoints(std::vector<cv::Mat> imgs, cv::Size boardsize);
 
 private:

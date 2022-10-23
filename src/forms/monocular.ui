@@ -243,6 +243,21 @@
     <attribute name="title">
      <string>Tab 2</string>
     </attribute>
+    <widget class="QTreeWidget" name="treeWidget">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>601</width>
+       <height>901</height>
+      </rect>
+     </property>
+     <column>
+      <property name="text">
+       <string>IMAGES</string>
+      </property>
+     </column>
+    </widget>
    </widget>
   </widget>
   <widget class="QLabel" name="label_image_title">

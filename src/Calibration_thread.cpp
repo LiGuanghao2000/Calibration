@@ -33,6 +33,6 @@ void thread_single::run()
     {
         Mo = new Chessboard();
     }
-    Mo->calibration(Path.toStdString(), cv::Size(11, 8), cv::Size(3, 3));
+    Mo->calibration(Path.toStdString(), Boardsize, Squaresize);
     emit Monocular_over();
 }
