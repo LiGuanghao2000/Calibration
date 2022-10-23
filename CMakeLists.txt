@@ -24,7 +24,10 @@ include_directories(
         ${OpenCV_INCLUDE_DIRS}
 )
 
-add_executable(camera_demo src/main.cpp src/camera.cpp src/headers/camera.h src/forms/camera.ui src/monocular.cpp src/headers/monocular.h src/forms/monocular.ui)
+add_executable(camera_demo src/main.cpp src/camera.cpp src/headers/camera.h
+        src/forms/camera.ui src/monocular.cpp src/headers/monocular.h src/forms/monocular.ui
+        src/Monocular_calibration.cpp src/headers/Monocular_calibration.h
+        )
 target_link_libraries(camera_demo
         Qt5::Core
         Qt5::Gui
