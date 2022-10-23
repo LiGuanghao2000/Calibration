@@ -7,15 +7,24 @@
 #include "headers/camera.h"
 #include "forms/ui_camera.h"
 
+/*!
+ *
+ * @param parent
+ */
 camera::camera(QWidget *parent) :
     QWidget(parent), ui(new Ui::camera) {
   ui->setupUi(this);
 }
 
+/*!
+ * @brief camera析构函数
+ */
 camera::~camera() {
   delete ui;
 }
-
+/*!
+ * @brief 主窗口初始化
+ */
 void camera::init_mainwindow()
 {
 

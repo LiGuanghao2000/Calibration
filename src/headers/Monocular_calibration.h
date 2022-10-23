@@ -1,4 +1,6 @@
-#pragma once
+#ifndef MONOCULAR_CALIBRATION_H_
+#define MONOCULAR_CALIBRATION_H_
+
 #include <iostream>
 #include <opencv2/opencv.hpp>
 #include <opencv2/highgui/highgui_c.h>
@@ -7,6 +9,7 @@
 #include <opencv2/highgui/highgui_c.h>
 #include <thread>
 #include <future>
+
 
 class Monocular_calibration
 {
@@ -17,10 +20,12 @@ public:
 	void Dateprintf(); 
 	bool DateWriteyml(std::string path);
 	void Error_analysis(cv::Size boardsize);
-
 	void calibration(std::string path, cv::Size boardsize, cv::Size squaresize);
 
-
+    /*!
+     * 获取每张标定角点误差
+     * @return std::vector<double>
+     */
 	std::vector<double> Get_errors()	{		return  errors;	}
 	double Get_totalerror()         	{		return total_error;	}
 	cv::Mat Get_matrix()                {		return  matrix;	}
@@ -82,3 +87,4 @@ private:
 	
 };
 
+#endif

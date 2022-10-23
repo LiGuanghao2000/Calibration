@@ -1,6 +1,5 @@
 #include "Monocular_calibration.h"
-#include <thread>
-#include <future>
+
 
 Monocular_calibration::Monocular_calibration()
 {
@@ -11,7 +10,11 @@ Monocular_calibration::~Monocular_calibration()
 {
 
 }
-
+/*!
+ * 获取图像
+ * @param path 图像文件路径
+ * @return
+ */
 bool Monocular_calibration::Get_images(std::string path)
 {
     std::string imagename;
@@ -45,9 +48,11 @@ std::vector<cv::Point2f> Getimagepoint(cv::Mat img, cv::Size boardsize)
 
     return points;
 }
-
-
-
+/*!
+ * 获取图像标定角点世界坐标
+ * @param boardsize 角点排列
+ * @param squaresize 角点距离
+ */
 void Monocular_calibration::Getobjectpoints(cv::Size boardsize,cv::Size squaresize)
 {
     for (int i = 0; i < images.size(); i++)
@@ -67,7 +72,9 @@ void Monocular_calibration::Getobjectpoints(cv::Size boardsize,cv::Size squaresi
         objectpoints.push_back(temppointset);
     }
 }
-
+/*!
+ * 标定函数
+ */
 void Monocular_calibration::Calibration()
 {
     cv::Size imagesize;
@@ -75,7 +82,9 @@ void Monocular_calibration::Calibration()
     imagesize.height = images[0].rows;
     calibrateCamera(objectpoints, imagepoints, imagesize, matrix, dist, rvecs, tvecs, 0);
 }
-
+/*!
+ * @brief 输出标定数据
+ */
 void Monocular_calibration::Dateprintf()
 {
     if (matrix.empty() || dist.empty())
@@ -86,7 +95,11 @@ void Monocular_calibration::Dateprintf()
     std::cout << "相机内参数矩阵" << std::endl << matrix << std::endl;
     std::cout << "畸变矩阵" << std::endl << dist << std::endl;
 }
-
+/*!
+ * @brief 把数据写入到.yml
+ * @param path 文件写入路径
+ * @return
+ */
 bool Monocular_calibration::DateWriteyml(std::string path)
 {
     if (matrix.empty() || dist.empty())
@@ -99,7 +112,10 @@ bool Monocular_calibration::DateWriteyml(std::string path)
     fs << "D" << dist;
     return true;
 }
-
+/*!
+ * 误差分析
+ * @param boardsize 角点size
+ */
 void Monocular_calibration::Error_analysis(cv::Size boardsize)
 {
     if (matrix.empty() || dist.empty())
@@ -136,7 +152,12 @@ void Monocular_calibration::Error_analysis(cv::Size boardsize)
     std::cout << "总体平均误差：" << total_err / images.size() << "像素" << std::endl;
     std::cout << "评价完成！" << std::endl;
 }
-//标定总函数
+/*!
+ * 标定总函数
+ * @param path 图像文件路径
+ * @param boardsize 角点size
+ * @param squaresize 角点距离
+ */
 void Monocular_calibration::calibration(std::string path, cv::Size boardsize, cv::Size squaresize)
 {
     if (!Get_images(path))
