@@ -8,22 +8,28 @@ set(CMAKE_AUTOUIC ON)
 
 set(CMAKE_PREFIX_PATH "D:/Qt/Qt5.142/5.14.2/msvc2017_64")
 
-include_directories(
-        ${PROJECT_SOURCE_DIR}/include
-        ${PROJECT_SOURCE_DIR}/src/headers
-)
+
 
 find_package(Qt5 COMPONENTS
         Core
         Gui
         Widgets
         REQUIRED)
+find_package(OpenCV REQUIRED)
+
+
+include_directories(
+        ${PROJECT_SOURCE_DIR}/include
+        ${PROJECT_SOURCE_DIR}/src/headers
+        ${OpenCV_INCLUDE_DIRS}
+)
 
 add_executable(camera_demo src/main.cpp src/camera.cpp src/headers/camera.h src/forms/camera.ui src/monocular.cpp src/headers/monocular.h src/forms/monocular.ui)
 target_link_libraries(camera_demo
         Qt5::Core
         Qt5::Gui
         Qt5::Widgets
+        ${OpenCV_LIBS}
         )
 
 if (WIN32)
