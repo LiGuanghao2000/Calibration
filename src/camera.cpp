@@ -64,4 +64,8 @@ void camera::on_pushButtonsingle_clicked()
  */
 void camera::on_pushButtondouble_clicked()
 {
+    binocular_ = new binocular();
+    connect(binocular_,&binocular::binocular_close, this,&camera::show_mainwindow);
+    binocular_->show();
+    this->hide();
 }

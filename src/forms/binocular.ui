@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Monocular</class>
- <widget class="QWidget" name="Monocular">
+ <class>binocular</class>
+ <widget class="QWidget" name="binocular">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,22 +11,19 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Monocular</string>
+   <string>binocular</string>
   </property>
-  <widget class="QTabWidget" name="tabWidget_main">
+  <widget class="QTabWidget" name="tabWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>651</width>
-     <height>931</height>
+     <width>711</width>
+     <height>941</height>
     </rect>
    </property>
    <property name="tabPosition">
     <enum>QTabWidget::West</enum>
-   </property>
-   <property name="currentIndex">
-    <number>0</number>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -37,60 +34,63 @@
       <rect>
        <x>10</x>
        <y>10</y>
-       <width>481</width>
+       <width>551</width>
        <height>41</height>
       </rect>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_sec">
+    <widget class="QLineEdit" name="lineEdit_2">
      <property name="geometry">
       <rect>
-       <x>500</x>
+       <x>10</x>
+       <y>60</y>
+       <width>551</width>
+       <height>41</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton">
+     <property name="geometry">
+      <rect>
+       <x>570</x>
        <y>10</y>
-       <width>101</width>
+       <width>91</width>
        <height>41</height>
       </rect>
      </property>
      <property name="text">
-      <string>选择文件</string>
+      <string>左相机</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_3">
+     <property name="geometry">
+      <rect>
+       <x>570</x>
+       <y>60</y>
+       <width>91</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>右相机</string>
      </property>
     </widget>
     <widget class="QGroupBox" name="groupBox">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>60</y>
-       <width>481</width>
-       <height>91</height>
+       <y>110</y>
+       <width>551</width>
+       <height>80</height>
       </rect>
      </property>
      <property name="title">
       <string>参数</string>
      </property>
-     <widget class="QSpinBox" name="spinBox_wid">
+     <widget class="QSpinBox" name="spinBox">
       <property name="geometry">
        <rect>
-        <x>50</x>
-        <y>40</y>
-        <width>51</width>
-        <height>31</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QSpinBox" name="spinBox_hei">
-      <property name="geometry">
-       <rect>
-        <x>170</x>
-        <y>40</y>
-        <width>51</width>
-        <height>31</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QSpinBox" name="spinBox_sq">
-      <property name="geometry">
-       <rect>
-        <x>300</x>
+        <x>60</x>
         <y>40</y>
         <width>51</width>
         <height>31</height>
@@ -107,33 +107,53 @@
        </rect>
       </property>
       <property name="text">
-       <string>行</string>
+       <string>行数</string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="spinBox_2">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>40</y>
+        <width>51</width>
+        <height>31</height>
+       </rect>
       </property>
      </widget>
      <widget class="QLabel" name="label_2">
       <property name="geometry">
        <rect>
-        <x>130</x>
+        <x>140</x>
         <y>40</y>
         <width>41</width>
         <height>31</height>
        </rect>
       </property>
       <property name="text">
-       <string>列</string>
+       <string>列数</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_3">
       <property name="geometry">
        <rect>
-        <x>250</x>
+        <x>270</x>
         <y>40</y>
         <width>41</width>
         <height>31</height>
        </rect>
       </property>
       <property name="text">
-       <string>长度</string>
+       <string>距离</string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="spinBox_3">
+      <property name="geometry">
+       <rect>
+        <x>320</x>
+        <y>40</y>
+        <width>51</width>
+        <height>31</height>
+       </rect>
       </property>
      </widget>
     </widget>
@@ -141,20 +161,20 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>160</y>
-       <width>481</width>
-       <height>91</height>
+       <y>200</y>
+       <width>551</width>
+       <height>71</height>
       </rect>
      </property>
      <property name="title">
-      <string>方式</string>
+      <string>GroupBox</string>
      </property>
-     <widget class="QRadioButton" name="radioButton_chess">
+     <widget class="QRadioButton" name="radioButton">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>40</y>
-        <width>86</width>
+        <x>10</x>
+        <y>30</y>
+        <width>81</width>
         <height>31</height>
        </rect>
       </property>
@@ -162,12 +182,12 @@
        <string>棋盘格</string>
       </property>
      </widget>
-     <widget class="QRadioButton" name="radioButton_circle">
+     <widget class="QRadioButton" name="radioButton_3">
       <property name="geometry">
        <rect>
-        <x>120</x>
-        <y>40</y>
-        <width>71</width>
+        <x>130</x>
+        <y>30</y>
+        <width>81</width>
         <height>31</height>
        </rect>
       </property>
@@ -175,12 +195,25 @@
        <string>圆盘</string>
       </property>
      </widget>
-     <widget class="QRadioButton" name="radioButton_doublering">
+     <widget class="QRadioButton" name="radioButton_4">
       <property name="geometry">
        <rect>
-        <x>210</x>
-        <y>40</y>
-        <width>86</width>
+        <x>240</x>
+        <y>30</y>
+        <width>81</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>单圆环</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="radioButton_5">
+      <property name="geometry">
+       <rect>
+        <x>360</x>
+        <y>30</y>
+        <width>81</width>
         <height>31</height>
        </rect>
       </property>
@@ -188,36 +221,23 @@
        <string>双圆环</string>
       </property>
      </widget>
-     <widget class="QRadioButton" name="radioButton_ellipse">
-      <property name="geometry">
-       <rect>
-        <x>310</x>
-        <y>40</y>
-        <width>141</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>椭圆纠正</string>
-      </property>
-     </widget>
     </widget>
     <widget class="QTextEdit" name="textEdit">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>270</y>
-       <width>591</width>
+       <y>280</y>
+       <width>651</width>
        <height>641</height>
       </rect>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_start">
+    <widget class="QPushButton" name="pushButton_4">
      <property name="geometry">
       <rect>
-       <x>500</x>
-       <y>210</y>
-       <width>101</width>
+       <x>570</x>
+       <y>230</y>
+       <width>91</width>
        <height>41</height>
       </rect>
      </property>
@@ -230,30 +250,15 @@
     <attribute name="title">
      <string>Tab 2</string>
     </attribute>
-    <widget class="QTreeWidget" name="treeWidget">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>10</y>
-       <width>601</width>
-       <height>901</height>
-      </rect>
-     </property>
-     <column>
-      <property name="text">
-       <string>IMAGES</string>
-      </property>
-     </column>
-    </widget>
    </widget>
   </widget>
-  <widget class="QLabel" name="label_image_title">
+  <widget class="QLabel" name="label_4">
    <property name="geometry">
     <rect>
-     <x>670</x>
+     <x>730</x>
      <y>10</y>
-     <width>1111</width>
-     <height>31</height>
+     <width>1051</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="frameShape">
@@ -263,12 +268,12 @@
     <string/>
    </property>
   </widget>
-  <widget class="QLabel" name="label_images">
+  <widget class="QLabel" name="label_5">
    <property name="geometry">
     <rect>
-     <x>670</x>
+     <x>730</x>
      <y>60</y>
-     <width>1111</width>
+     <width>1061</width>
      <height>881</height>
     </rect>
    </property>
@@ -282,27 +287,14 @@
   <widget class="QPushButton" name="close">
    <property name="geometry">
     <rect>
-     <x>1700</x>
+     <x>1720</x>
      <y>950</y>
-     <width>81</width>
+     <width>71</width>
      <height>41</height>
     </rect>
    </property>
    <property name="text">
     <string>关闭</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_help">
-   <property name="geometry">
-    <rect>
-     <x>50</x>
-     <y>950</y>
-     <width>1631</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
    </property>
   </widget>
  </widget>

@@ -37,7 +37,18 @@ void Monocular::init_mianwindow()
   ui->spinBox_hei->setValue(8);
   ui->spinBox_sq->setValue(3);
 
-  ui->label_help->setText("lgh");
+
+//  ui->pushButton_sec->setToolTip(s.toUtf8());
+//  ui->pushButton_start->setToolTip(s.toUtf8());
+//  ui->spinBox_sq->setToolTip("角点之间距离");
+//  ui->spinBox_wid->setToolTip("角点的列数");
+//  ui->spinBox_hei->setToolTip("角点行数");
+//  ui->radioButton_chess->setToolTip("棋盘格");
+//  ui->radioButton_ellipse->setToolTip("椭圆纠偏");
+//  ui->radioButton_doublering->setToolTip("双圆环");
+//  ui->radioButton_circle->setToolTip("圆盘");
+
+  ui->label_help->setText("Select the. txt file containing the image path and click Start Calibration");
 
   ui->radioButton_chess->setChecked(true);
 
@@ -87,7 +98,7 @@ void Monocular::on_pushButton_start_clicked()
                 break;
         }
     }
-    save_path = QFileDialog::getExistingDirectory(this);
+    save_path = QFileDialog::getExistingDirectory(this,"Calibration date save path");
     int k=0;
     if (ui->radioButton_chess->isChecked())
     {
@@ -113,8 +124,14 @@ void Monocular::on_pushButton_start_clicked()
 void Monocular::Monocular_Done()
 {
     ui->textEdit->append("Calibration done");
-    th_s->Mo->DateWriteyml(save_path.toStdString()+"/Calibration_Date.yml");
-    ui->textEdit->append(save_path+"/Calibration_Date.yml");
+    if (save_path.isNull())
+    {
+
+    }else
+    {
+        th_s->Mo->DateWriteyml(save_path.toStdString()+"/Calibration_Date.yml");
+        ui->textEdit->append(save_path+"/Calibration_Date.yml");
+    }
     double time=th_s->Mo->Get_usingtime();
     ui->textEdit->append("usingtime: "+QString::number(time));
 

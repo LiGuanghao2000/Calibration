@@ -9,6 +9,7 @@
 #include "iostream"
 #include "qdebug.h"
 #include "monocular.h"
+#include "binocular.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class camera; }
@@ -33,6 +34,7 @@ class camera : public QWidget {
  private:
   Ui::camera *ui;
   Monocular *monocular_;
+  binocular *binocular_;
 };
 
 #endif //CAMERA_DEMO__CAMERA_H_
