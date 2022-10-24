@@ -33,9 +33,7 @@ void camera::init_mainwindow()
   QImage image("../sysinputimages/title.jpg");
 
   ui->label_image->setPixmap(QPixmap::fromImage(image.scaled(ui->label_image->size(), Qt::KeepAspectRatio)));
-  //ui->label_name->setText("lj");
-  ui->label_name->setText(tr("name:LGH"));
-  ui->label_time->setText("time:2022.7.3");
+
 }
 /**
  * @brief  显示主窗口

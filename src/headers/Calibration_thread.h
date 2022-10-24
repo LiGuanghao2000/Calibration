@@ -19,7 +19,7 @@ class thread_single :
 Q_OBJECT
 
 public:
-    thread_single(QString path, cv::Size boardsize,cv::Size squaresize);
+    thread_single(QString path, cv::Size boardsize,cv::Size squaresize,int method);
     ~thread_single();
 
 protected:
@@ -36,9 +36,7 @@ private:
     cv::Size Boardsize;
     cv::Size Squaresize;
 
-
-
-
+    int Method;
 
 public:
 

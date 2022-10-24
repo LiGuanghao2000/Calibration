@@ -37,6 +37,9 @@ void Monocular::init_mianwindow()
   ui->spinBox_hei->setValue(8);
   ui->spinBox_sq->setValue(3);
 
+  ui->label_help->setText("lgh");
+
+  ui->radioButton_chess->setChecked(true);
 
 }
 /*!
@@ -85,7 +88,21 @@ void Monocular::on_pushButton_start_clicked()
         }
     }
     save_path = QFileDialog::getExistingDirectory(this);
-    th_s = new thread_single(images_path,cv::Size(ui->spinBox_wid->text().toInt(), ui->spinBox_hei->text().toInt()), cv::Size(ui->spinBox_sq->text().toInt(), ui->spinBox_sq->text().toInt()));
+    int k=0;
+    if (ui->radioButton_chess->isChecked())
+    {
+        k=1;
+    }else if (ui->radioButton_circle->isChecked())
+    {
+        k=2;
+    } else if (ui->radioButton_doublering->isChecked())
+    {
+        k=3;
+    }else if (ui->radioButton_ellipse->isChecked())
+    {
+        k=4;
+    }
+    th_s = new thread_single(images_path,cv::Size(ui->spinBox_wid->text().toInt(), ui->spinBox_hei->text().toInt()), cv::Size(ui->spinBox_sq->text().toInt(), ui->spinBox_sq->text().toInt()),k);
     connect(th_s,&thread_single::Monocular_over,this,&Monocular::Monocular_Done);
     th_s->start();
     ui->textEdit->append("Calibration...");
