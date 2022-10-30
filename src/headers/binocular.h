@@ -7,6 +7,8 @@
 
 #include <QWidget>
 #include "qfiledialog.h"
+#include "qmessagebox.h"
+
 #include "opencv2/opencv.hpp"
 
 
@@ -32,6 +34,7 @@ public slots:
     void on_close_clicked();
     void on_pushButton_L_clicked();
     void on_pushButton_R_clicked();
+    void on_pushButton_ST_clicked();
 
 signals:
     void binocular_close();
@@ -43,6 +46,7 @@ private:
     Ui::binocular *ui;
     QString imagepath_L;
     QString imagepath_R;
+    QString save_path;
     std::vector<cv::Mat> images_L;
     std::vector<cv::Mat> images_R;
 };

@@ -50,3 +50,15 @@ void thread_single::run()
     Mo->calibration(Path.toStdString(), Boardsize, Squaresize);
     emit Monocular_over();
 }
+
+
+thread_double::thread_double(QString path_L, QString path_R, cv::Size boardsize, cv::Size squaresize, int method)
+{
+    Path_L = path_L;
+    Path_R = path_R;
+    Boardsize = boardsize;
+    Squaresize = squaresize;
+    Method = method;
+}
+
+

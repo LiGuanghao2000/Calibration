@@ -67,9 +67,6 @@ void binocular::on_pushButton_L_clicked()
         ui->textEdit->append(imagepath_L);
         ui->lineEdit_L->setText(imagepath_L);
     }
-
-
-
 }
 /*!
  * 选择右文件按钮点击
@@ -89,4 +86,38 @@ void binocular::on_pushButton_R_clicked()
         ui->lineEdit_R->setText(imagepath_R);
     }
 }
+/*!
+ * 开始标定按钮按下
+ */
+void binocular::on_pushButton_ST_clicked()
+{
+    if(imagepath_L.isNull()|imagepath_R.isNull())
+    {
+        switch (QMessageBox::warning(this, tr("error"), tr("please check the input image path!"), QMessageBox::Cancel, QMessageBox::Cancel))
+        {
+            case QMessageBox::Cancel:
+                return;
+            default:
+                break;
+        }
+    }
+    save_path = QFileDialog::getExistingDirectory(this,"Calibration date save path");
 
+    int k=0;
+    if (ui->radioButton_chess->isChecked())
+    {
+        k=1;
+    }else if (ui->radioButton_circle->isChecked())
+    {
+        k=2;
+    } else if (ui->radioButton_ring->isChecked())
+    {
+        k=3;
+    }else if (ui->radioButton_double_ring->isChecked())
+    {
+        k=4;
+    }
+    ui->textEdit->append("Calibration...");
+
+
+}
