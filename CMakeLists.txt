@@ -27,6 +27,7 @@ include_directories(
 add_executable(camera_demo src/main.cpp src/camera.cpp src/headers/camera.h
         src/forms/camera.ui src/monocular.cpp src/headers/monocular.h src/forms/monocular.ui
         src/Monocular_calibration.cpp src/headers/Monocular_calibration.h
+        src/Binocular_calibration.cpp src/headers/Binocular_calibration.h
         src/Calibration_thread.cpp src/headers/Calibration_thread.h src/binocular.cpp src/headers/binocular.h src/forms/binocular.ui)
 target_link_libraries(camera_demo
         Qt5::Core

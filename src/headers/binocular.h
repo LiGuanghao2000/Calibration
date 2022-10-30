@@ -6,6 +6,8 @@
 #define CAMERA_DEMO_BINOCULAR_H
 
 #include <QWidget>
+#include "qfiledialog.h"
+#include "opencv2/opencv.hpp"
 
 
 QT_BEGIN_NAMESPACE
@@ -24,14 +26,25 @@ public:
 
     ~binocular() override;
 
+
+
 public slots:
     void on_close_clicked();
+    void on_pushButton_L_clicked();
+    void on_pushButton_R_clicked();
 
 signals:
     void binocular_close();
 
 private:
+    void init_mainwindow();
+
+private:
     Ui::binocular *ui;
+    QString imagepath_L;
+    QString imagepath_R;
+    std::vector<cv::Mat> images_L;
+    std::vector<cv::Mat> images_R;
 };
 
 
