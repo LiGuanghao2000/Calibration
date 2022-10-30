@@ -26,7 +26,7 @@
     <enum>QTabWidget::West</enum>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -253,6 +253,21 @@
     <attribute name="title">
      <string>Tab 2</string>
     </attribute>
+    <widget class="QTreeWidget" name="treeWidget">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>671</width>
+       <height>911</height>
+      </rect>
+     </property>
+     <column>
+      <property name="text">
+       <string>IMAGES</string>
+      </property>
+     </column>
+    </widget>
    </widget>
   </widget>
   <widget class="QLabel" name="label_title">
@@ -298,6 +313,19 @@
    </property>
    <property name="text">
     <string>关闭</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_help">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>960</y>
+     <width>1671</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
  </widget>

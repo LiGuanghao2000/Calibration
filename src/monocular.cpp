@@ -135,6 +135,17 @@ void Monocular::Monocular_Done()
     double time=th_s->Mo->Get_usingtime();
     ui->textEdit->append("usingtime: "+QString::number(time));
 
+    std::string imagename;
+    std::ifstream fin(save_path.toStdString()+"/Calibration_Date.yml");
+    if (!fin.is_open())
+    {
+        ui->textEdit->append("Calibration_Date.yml open error");
+    }
+    while (std::getline(fin, imagename))
+    {
+        ui->textEdit->append(QString::fromStdString(imagename));
+    }
+
     std::vector<double> errors;
     th_s->Mo->Error_analysis(cv::Size(11, 8));
     errors=th_s->Mo->Get_errors();

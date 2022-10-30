@@ -58,6 +58,10 @@ public:
 protected:
     void run();
 
+
+signals:
+    void Binocular_over();
+
 private:
     QString Path_L;
     QString Path_R;

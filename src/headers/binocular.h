@@ -8,8 +8,13 @@
 #include <QWidget>
 #include "qfiledialog.h"
 #include "qmessagebox.h"
+#include "qtreewidget.h"
+
+#include "Calibration_thread.h"
 
 #include "opencv2/opencv.hpp"
+
+#include "fstream"
 
 
 QT_BEGIN_NAMESPACE
@@ -35,6 +40,8 @@ public slots:
     void on_pushButton_L_clicked();
     void on_pushButton_R_clicked();
     void on_pushButton_ST_clicked();
+    void on_treeWidget_itemClicked(QTreeWidgetItem *item, int column);
+    void Binocular_done();
 
 signals:
     void binocular_close();
@@ -44,11 +51,13 @@ private:
 
 private:
     Ui::binocular *ui;
+    thread_double *th_d = nullptr;
     QString imagepath_L;
     QString imagepath_R;
     QString save_path;
     std::vector<cv::Mat> images_L;
     std::vector<cv::Mat> images_R;
+    std::vector<cv::Mat> images_E;
 };
 
 

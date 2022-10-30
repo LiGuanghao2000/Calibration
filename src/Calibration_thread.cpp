@@ -50,8 +50,14 @@ void thread_single::run()
     Mo->calibration(Path.toStdString(), Boardsize, Squaresize);
     emit Monocular_over();
 }
-
-
+/*!
+ * 构造函数
+ * @param path_L 左相机图像文件路径
+ * @param path_R 右相机图像文件路径
+ * @param boardsize 角点尺寸
+ * @param squaresize 角点距离
+ * @param method 标定方法
+ */
 thread_double::thread_double(QString path_L, QString path_R, cv::Size boardsize, cv::Size squaresize, int method)
 {
     Path_L = path_L;
@@ -59,6 +65,38 @@ thread_double::thread_double(QString path_L, QString path_R, cv::Size boardsize,
     Boardsize = boardsize;
     Squaresize = squaresize;
     Method = method;
+}
+/*!
+ * 析构函数
+ */
+thread_double::~thread_double() noexcept
+{
+    if(Bi!= nullptr)
+    {
+        delete Bi;
+    }
+}
+
+void thread_double::run()
+{
+    if(Bi == nullptr)
+    {
+        if (Method == 1)
+        {
+            Bi = new Chessboard_Bin();
+        } else if (Method == 2)
+        {
+
+        } else if (Method == 3)
+        {
+
+        } else if (Method == 4)
+        {
+
+        }
+    }
+    Bi->calibration(Path_L.toStdString(),Path_R.toStdString(),Boardsize,Squaresize);
+    emit Binocular_over();
 }
 
 

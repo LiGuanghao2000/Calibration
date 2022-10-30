@@ -24,6 +24,7 @@ public:
 	std::vector<cv::Mat> Get_Polar_rectification_images();
 	std::vector<cv::Mat> Get_Original_images_L();
 	std::vector<cv::Mat> Get_Original_images_R();
+    double Get_usingtime(){return usingtime;}
 
 
 private:
@@ -53,6 +54,7 @@ private:
 	cv::Mat R, T, E, F;
 	cv::Mat R1, R2, P1, P2, Q;
 
+    double usingtime;
 };
 
 
