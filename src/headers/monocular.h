@@ -31,6 +31,8 @@ class Monocular : public QWidget {
   void init_mianwindow();
 
  private slots:
+    void on_radioButton_chess_clicked();
+  void on_radioButton_circle_clicked();
   void on_close_clicked();
   void on_pushButton_sec_clicked();
   void on_pushButton_start_clicked();

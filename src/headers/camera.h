@@ -10,6 +10,8 @@
 #include "qdebug.h"
 #include "monocular.h"
 #include "binocular.h"
+#include "qimage.h"
+#include "qpixmap.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class camera; }

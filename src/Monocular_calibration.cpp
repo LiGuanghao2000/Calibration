@@ -173,8 +173,12 @@ void Monocular_calibration::calibration(std::string path, cv::Size boardsize, cv
     double stop = clock();
     usingtime=((double)(stop - start)) / CLK_TCK;
 }
-
-//棋盘格
+/*!
+ * 棋盘格获取单张图片角点
+ * @param img 输入图像
+ * @param boardsize 角点规格
+ * @return
+ */
 std::vector<cv::Point2f> Chessboard::Getimagepoints(cv::Mat img, cv::Size boardsize)
 {
     mymutex.lock();
@@ -192,7 +196,11 @@ std::vector<cv::Point2f> Chessboard::Getimagepoints(cv::Mat img, cv::Size boards
 
     return points;
 }
-
+/*!
+ * 棋盘格获取多张图片角点
+ * @param imgs 输入图像
+ * @param boardsize 角点规格
+ */
 void Chessboard::Getimagespoints(std::vector<cv::Mat> imgs, cv::Size boardsize)
 {
     /*for (int i = 0; i < imgs.size(); i++)
@@ -215,6 +223,59 @@ void Chessboard::Getimagespoints(std::vector<cv::Mat> imgs, cv::Size boardsize)
     }
 }
 
+/*!
+ * 圆盘获取单张图片角点
+ * @param img 输入图像
+ * @param boardsize 角点规格
+ * @return
+ */
+std::vector<cv::Point2f> Circle::Getimagepoints(cv::Mat img, cv::Size boardsize)
+{
+    mymutex.lock();
+    images_draw.push_back(img);
+    mymutex.unlock();
+
+    std::vector<cv::Point2f> points;
+    cv::Mat im = img;
+
+//    findChessboardCorners(img, boardsize, points);
+//    find4QuadCornerSubpix(img, points, cv::Size(3, 3));
+//    drawChessboardCorners(im, boardsize, points, true);
+
+    findCirclesGrid(img, boardsize, points);
+    find4QuadCornerSubpix(img, points, cv::Size(3, 3));
+    drawChessboardCorners(im, boardsize, points, true);
+
+    std::cout << "角点检测成功" << std::endl;
+
+    return points;
+}
+/*!
+ * 棋盘格获取多张图片角点
+ * @param imgs 输入图像
+ * @param boardsize 角点规格
+ */
+void Circle::Getimagespoints(std::vector<cv::Mat> imgs, cv::Size boardsize)
+{
+    /*for (int i = 0; i < imgs.size(); i++)
+    {
+        imagepoints.push_back(Getimagepoints(imgs[i], boardsize));
+        std::cout << "第" << i + 1 << "张检测成功" << std::endl;
+    }*/
+    if (imgs.size() == 0)
+    {
+        std::cout << "图片未加载成功" << std::endl;
+        return;
+    }
+    for (int i = 0; i < imgs.size(); i++)
+    {
+        results[i] = std::async(std::launch::async, &Circle::Getimagepoints,new Circle(),imgs[i], boardsize);
+    }
+    for (int i = 0; i < imgs.size(); i++)
+    {
+        imagepoints.push_back(results[i].get());
+    }
+}
 
 
 

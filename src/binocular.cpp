@@ -186,6 +186,24 @@ void binocular::Binocular_done()
     }
 }
 /*!
+ * 棋盘格方法按钮点击
+ */
+void binocular::on_radioButton_chess_clicked()
+{
+    ui->spinBox_sq->setValue(3);
+    ui->spinBox_hei->setValue(8);
+    ui->spinBox_wid->setValue(11);
+}
+/*!
+ * 圆盘方法按钮点击
+ */
+void binocular::on_radioButton_circle_clicked()
+{
+    ui->spinBox_sq->setValue(9);
+    ui->spinBox_hei->setValue(5);
+    ui->spinBox_wid->setValue(7);
+}
+/*!
  * treewidget点击
  * @param item
  * @param column

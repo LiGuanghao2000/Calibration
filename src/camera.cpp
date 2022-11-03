@@ -14,6 +14,7 @@
 camera::camera(QWidget *parent) :
     QWidget(parent), ui(new Ui::camera) {
   ui->setupUi(this);
+    init_mainwindow();
 }
 
 /*!
@@ -27,10 +28,16 @@ camera::~camera() {
  */
 void camera::init_mainwindow()
 {
-
   setWindowTitle("model");
   setFixedSize(QSize(500, 290));
-  QImage image("../sysinputimages/title.jpg");
+  QImage image("../sysinputimages/title.png");
+    if (image.isNull())
+    {
+        std::cout<<"error"<<std::endl;
+    } else
+    {
+        std::cout<<"open"<<std::endl;
+    }
 
   ui->label_image->setPixmap(QPixmap::fromImage(image.scaled(ui->label_image->size(), Qt::KeepAspectRatio)));
 

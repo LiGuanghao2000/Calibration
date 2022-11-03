@@ -70,3 +70,14 @@ private:
 };
 
 
+class Circle_Bin:public Binocular_calibration
+{
+public:
+
+    virtual std::vector<cv::Point2f> Getimagepoints(cv::Mat img, cv::Size boardsize);
+    virtual void Getimagespoints(std::vector<cv::Mat> imgsl, std::vector<cv::Mat> imgsr, cv::Size boardsize);
+
+private:
+
+};
+

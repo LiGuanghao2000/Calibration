@@ -37,6 +37,8 @@ public:
 
 public slots:
     void on_close_clicked();
+    void on_radioButton_chess_clicked();
+    void on_radioButton_circle_clicked();
     void on_pushButton_L_clicked();
     void on_pushButton_R_clicked();
     void on_pushButton_ST_clicked();

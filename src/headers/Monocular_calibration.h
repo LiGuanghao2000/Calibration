@@ -98,18 +98,18 @@ private:
  * 如需要其他方法，构建下方其他的类，并且重写纯虚函数
  */
 
-//class Circle : public Monocular_calibration
-//{
-//public:
-//    virtual std::vector<cv::Point2f> Getimagepoints(cv::Mat img, cv::Size boardsize);
-//    virtual void Getimagespoints(std::vector<cv::Mat> imgs, cv::Size boardsize);
-//    virtual std::vector<cv::Mat> Get_images_C(){return images_draw;}
-//    //virtual void Getimagespoints(std::vector<cv::Mat> imgs, cv::Size boardsize);
-//private:
-//
-//    std::vector<cv::Mat> images_draw;
-//    std::mutex mymutex;
-//};
+class Circle : public Monocular_calibration
+{
+public:
+    virtual std::vector<cv::Point2f> Getimagepoints(cv::Mat img, cv::Size boardsize);
+    virtual void Getimagespoints(std::vector<cv::Mat> imgs, cv::Size boardsize);
+    virtual std::vector<cv::Mat> Get_images_C(){return images_draw;}
+    //virtual void Getimagespoints(std::vector<cv::Mat> imgs, cv::Size boardsize);
+private:
+
+    std::vector<cv::Mat> images_draw;
+    std::mutex mymutex;
+};
 //
 //class Double_ring : public Monocular_calibration
 //{

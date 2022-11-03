@@ -193,7 +193,24 @@ void Monocular::on_treeWidget_itemClicked(QTreeWidgetItem *item, int column)
         ui->label_images->setPixmap(QPixmap::fromImage(img.scaled(ui->label_images->size(), Qt::KeepAspectRatio)));
     }
 }
-
+/*!
+ * 棋盘格标定方法按钮点击
+ */
+void Monocular::on_radioButton_chess_clicked()
+{
+    ui->spinBox_wid->setValue(11);
+    ui->spinBox_hei->setValue(8);
+    ui->spinBox_sq->setValue(3);
+}
+/*!
+ * 圆盘标定方法按钮点击
+ */
+void Monocular::on_radioButton_circle_clicked()
+{
+    ui->spinBox_wid->setValue(7);
+    ui->spinBox_hei->setValue(5);
+    ui->spinBox_sq->setValue(9);
+}
 
 
 

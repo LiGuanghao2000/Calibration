@@ -37,7 +37,7 @@ void thread_single::run()
             Mo = new Chessboard();
         } else if (Method == 2)
         {
-
+            Mo = new Circle();
         } else if (Method == 3)
         {
 
@@ -86,7 +86,7 @@ void thread_double::run()
             Bi = new Chessboard_Bin();
         } else if (Method == 2)
         {
-
+            Bi = new Circle_Bin();
         } else if (Method == 3)
         {
 

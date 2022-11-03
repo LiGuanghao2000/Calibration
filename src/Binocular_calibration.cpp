@@ -200,7 +200,12 @@ std::vector<cv::Mat> Binocular_calibration::Get_Original_images_R()
     return images_R;
 }
 
-//棋盘格
+/*!
+ * 棋盘格单张角点获取
+ * @param img 输入图像
+ * @param boardsize 角点规格
+ * @return
+ */
 std::vector<cv::Point2f> Chessboard_Bin::Getimagepoints(cv::Mat img, cv::Size boardsize)
 {
     std::vector<cv::Point2f> points;
@@ -217,6 +222,12 @@ std::vector<cv::Point2f> Chessboard_Bin::Getimagepoints(cv::Mat img, cv::Size bo
 
     return points;
 }
+/*!
+ * 棋盘格多张角点获取
+ * @param imgsl 输入左相机图像
+ * @param imgsr 输入右相机图像
+ * @param boardsize 角点规格
+ */
 void Chessboard_Bin::Getimagespoints(std::vector<cv::Mat> imgsl, std::vector<cv::Mat> imgsr, cv::Size boardsize)
 {
     if (imgsl.size() == 0)
@@ -242,4 +253,56 @@ void Chessboard_Bin::Getimagespoints(std::vector<cv::Mat> imgsl, std::vector<cv:
         std::cout << "R  " << "第 " << i << " 张检测成功" << std::endl;
     }
 }
+/*!
+ * 圆盘单张角点获取
+ * @param img 输入图像
+ * @param boardsize 角点规格
+ * @return
+ */
+std::vector<cv::Point2f> Circle_Bin::Getimagepoints(cv::Mat img, cv::Size boardsize)
+{
+    std::vector<cv::Point2f> points;
+    cv::Mat im;
+    cv::cvtColor(img, im, CV_RGB2GRAY);
 
+    findCirclesGrid(im, boardsize, points);
+    find4QuadCornerSubpix(im, points, cv::Size(3, 3));
+    //drawChessboardCorners(im, boardsize, points, true);
+    //mymutex.lock();
+    //images_draw.push_back(img);
+    //mymutex.unlock();
+    std::cout << "检测中..." << std::endl;
+
+    return points;
+}
+/*!
+ * 棋盘格多张角点获取
+ * @param imgsl 输入左相机图像
+ * @param imgsr 输入右相机图像
+ * @param boardsize 角点规格
+ */
+void Circle_Bin::Getimagespoints(std::vector<cv::Mat> imgsl, std::vector<cv::Mat> imgsr, cv::Size boardsize)
+{
+    if (imgsl.size() == 0)
+    {
+        std::cout << "左图片未加载成功" << std::endl;
+        return;
+    }
+    if (imgsr.size() == 0)
+    {
+        std::cout << "右图片未加载成功" << std::endl;
+        return;
+    }
+    for (int i = 0; i < imgsl.size(); i++)
+    {
+        results_L[i] = std::async(std::launch::async, &Circle_Bin::Getimagepoints, new Circle_Bin(), imgsl[i], boardsize);
+        results_R[i] = std::async(std::launch::async, &Circle_Bin::Getimagepoints, new Circle_Bin(), imgsr[i], boardsize);
+    }
+    for (int i = 0; i < imgsl.size(); i++)
+    {
+        imagepoints_L.push_back(results_L[i].get());
+        std::cout << "L  " << "第 " << i << " 张检测成功" << std::endl;
+        imagepoints_R.push_back(results_R[i].get());
+        std::cout << "R  " << "第 " << i << " 张检测成功" << std::endl;
+    }
+}
