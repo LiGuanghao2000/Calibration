@@ -243,7 +243,7 @@ std::vector<cv::Point2f> Circle::Getimagepoints(cv::Mat img, cv::Size boardsize)
 //    drawChessboardCorners(im, boardsize, points, true);
 
     findCirclesGrid(img, boardsize, points);
-    find4QuadCornerSubpix(img, points, cv::Size(3, 3));
+    find4QuadCornerSubpix(img, points, cv::Size(7, 7));
     drawChessboardCorners(im, boardsize, points, true);
 
     std::cout << "角点检测成功" << std::endl;
@@ -251,7 +251,7 @@ std::vector<cv::Point2f> Circle::Getimagepoints(cv::Mat img, cv::Size boardsize)
     return points;
 }
 /*!
- * 棋盘格获取多张图片角点
+ * 圆盘获取多张图片角点
  * @param imgs 输入图像
  * @param boardsize 角点规格
  */
