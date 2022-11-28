@@ -40,7 +40,7 @@ void thread_single::run()
             Mo = new Circle();
         } else if (Method == 3)
         {
-
+            //Mo =new Double_ring();
         } else if (Method == 4)
         {
 

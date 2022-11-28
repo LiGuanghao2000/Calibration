@@ -30,6 +30,7 @@ public:
      */
 	std::vector<double> Get_errors()	{		return  errors;	}
 	double Get_totalerror()         	{		return total_error;	}
+	double Get_error()               	{		return error;	}
 	cv::Mat Get_matrix()                {		return  matrix;	}
 	cv::Mat Get_dist()	                {		return  dist;	}
 
@@ -74,6 +75,7 @@ private:
 
 	std::vector<double>errors;//每张图片误差
 	double total_error;//平均误差
+    double error;
 
     double usingtime;
 
@@ -110,19 +112,10 @@ private:
     std::vector<cv::Mat> images_draw;
     std::mutex mymutex;
 };
-//
-//class Double_ring : public Monocular_calibration
-//{
-//public:
-//    virtual std::vector<cv::Point2f> Getimagepoints(cv::Mat img, cv::Size boardsize);
-//    virtual void Getimagespoints(std::vector<cv::Mat> imgs, cv::Size boardsize);
-//    virtual std::vector<cv::Mat> Get_images_C(){return images_draw;}
-//    //virtual void Getimagespoints(std::vector<cv::Mat> imgs, cv::Size boardsize);
-//private:
-//
-//    std::vector<cv::Mat> images_draw;
-//    std::mutex mymutex;
-//};
+/*!
+ * 双圆环
+ */
+
 //
 //class Ellipse : public Monocular_calibration
 //{

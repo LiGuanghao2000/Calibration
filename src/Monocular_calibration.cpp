@@ -81,7 +81,7 @@ void Monocular_calibration::Calibration()
     cv::Size imagesize;
     imagesize.width = images[0].cols;
     imagesize.height = images[0].rows;
-    calibrateCamera(objectpoints, imagepoints, imagesize, matrix, dist, rvecs, tvecs, 0);
+    error = calibrateCamera(objectpoints, imagepoints, imagesize, matrix, dist, rvecs, tvecs, 0);
 }
 /*!
  * @brief 输出标定数据
@@ -276,6 +276,9 @@ void Circle::Getimagespoints(std::vector<cv::Mat> imgs, cv::Size boardsize)
         imagepoints.push_back(results[i].get());
     }
 }
+
+
+
 
 
 

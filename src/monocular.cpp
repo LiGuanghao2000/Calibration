@@ -134,6 +134,7 @@ void Monocular::Monocular_Done()
     }
     double time=th_s->Mo->Get_usingtime();
     ui->textEdit->append("usingtime: "+QString::number(time));
+    ui->textEdit->append("error: "+QString::number(th_s->Mo->Get_error()));
 
     std::string imagename;
     std::ifstream fin(save_path.toStdString()+"/Calibration_Date.yml");
@@ -147,13 +148,13 @@ void Monocular::Monocular_Done()
     }
 
     std::vector<double> errors;
-    th_s->Mo->Error_analysis(cv::Size(11, 8));
-    errors=th_s->Mo->Get_errors();
-    for (int i = 0; i < errors.size(); ++i)
-    {
-        ui->textEdit->append("error " +QString::number(i)+" : "+QString::number(errors[i]));
-    }
-    ui->textEdit->append("avererror: "+QString::number(th_s->Mo->Get_totalerror()/errors.size()));
+//    th_s->Mo->Error_analysis(cv::Size(11, 8));
+//    errors=th_s->Mo->Get_errors();
+//    for (int i = 0; i < errors.size(); ++i)
+//    {
+//        ui->textEdit->append("error " +QString::number(i)+" : "+QString::number(errors[i]));
+//    }
+//    ui->textEdit->append("avererror: "+QString::number(th_s->Mo->Get_totalerror()/errors.size()));
 
     images=th_s->Mo->Get_images_orgin();
     QTreeWidgetItem* item = new QTreeWidgetItem(QStringList() << "images_Calibration");
